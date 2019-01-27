@@ -1,0 +1,8 @@
+<strings>
+  <!-- MainActivity -->
+  <string name="title_home">Teleporter - Home</string>
+  <string name="content_home">ワープの種類を選択してください</string>
+  <string name="button_home1">ワールドワープ</string>
+  <string name="button_home2">ポイントワープ</string>
+  <string name="button_home3">サーバートランスファー</string>
+</strings>
