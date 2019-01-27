@@ -1,8 +1,17 @@
 <strings>
+  <string name="prefix">システム>>Teleporter>> </string>
   <!-- MainActivity -->
   <string name="title_home">Teleporter - Home</string>
   <string name="content_home">ワープの種類を選択してください</string>
   <string name="button_home1">ワールドワープ</string>
   <string name="button_home2">ポイントワープ</string>
   <string name="button_home3">サーバートランスファー</string>
+
+  <!-- SelectLevelActivity -->
+  <string name="title_select_level">Teleporter - ワールド選択</string>
+  <string name="content_select_level"> - 移動先のワールドを選択してください。現在のワールドは%1です</string>
+  <string name="button_select_level1">セントラル</string>
+  <string name="button_select_level2">生活ワールド</string>
+  <string name="button_select_level3">資源ワールド</string>
+  <string name="message_select_level">ワールドを移動しました</string>
 </strings>
