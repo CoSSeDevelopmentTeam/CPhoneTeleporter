@@ -2,6 +2,7 @@ package net.comorevi.cpapp.teleporter;
 
 import cn.nukkit.Player;
 import cn.nukkit.level.Level;
+import cn.nukkit.utils.TextFormat;
 import net.comorevi.cphone.cphone.application.ApplicationManifest;
 import net.comorevi.cphone.cphone.model.Bundle;
 import net.comorevi.cphone.cphone.model.ListResponse;
@@ -38,15 +39,15 @@ public class SelectLevelActivity extends ListActivity {
         switch (listResponse.getButtonIndex()) {
             case 0:
                 player.teleport(SharingData.server.getLevelByName("central").getSpawnLocation());
-                player.sendMessage(bundle.getString("prefix") + bundle.getString("message_select_level"));
+                bundle.getCPhone().setHomeMessage(TextFormat.AQUA + bundle.getString("message_select_level"));
                 break;
             case 1:
                 player.teleport(SharingData.server.getLevelByName("life").getSpawnLocation());
-                player.sendMessage(bundle.getString("prefix") + bundle.getString("message_select_level"));
+                bundle.getCPhone().setHomeMessage(TextFormat.AQUA + bundle.getString("message_select_level"));
                 break;
             case 2:
                 player.teleport(SharingData.server.getLevelByName("resource").getSpawnLocation());
-                player.sendMessage(bundle.getString("prefix") + bundle.getString("message_select_level"));
+                bundle.getCPhone().setHomeMessage(TextFormat.AQUA + bundle.getString("message_select_level"));
                 break;
         }
         return ReturnType.TYPE_END;
