@@ -47,9 +47,6 @@ public class MainActivity extends ListActivity {
             case 3:
                 new EditPointActivity(getManifest()).start(cPhone.getPlayer(), bundle.getStrings());
                 return ReturnType.TYPE_CONTINUE;
-            case 4:
-                new SettingsActivity(getManifest()).start(cPhone.getPlayer(), bundle.getStrings());
-                return ReturnType.TYPE_CONTINUE;
         }
 
         return ReturnType.TYPE_END;
