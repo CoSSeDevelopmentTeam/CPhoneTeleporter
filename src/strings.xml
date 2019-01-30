@@ -2,16 +2,60 @@
   <string name="prefix">システム>>Teleporter>> </string>
   <!-- MainActivity -->
   <string name="title_home">Teleporter - Home</string>
-  <string name="content_home">ワープの種類を選択してください</string>
+  <string name="content_home">希望の操作を選択してください</string>
   <string name="button_home1">ワールドワープ</string>
   <string name="button_home2">ポイントワープ</string>
   <string name="button_home3">サーバートランスファー</string>
+  <string name="button_home4">ポイント編集</string>
 
   <!-- SelectLevelActivity -->
   <string name="title_select_level">Teleporter - ワールド選択</string>
-  <string name="content_select_level"> - 移動先のワールドを選択してください。現在のワールドは%1です</string>
+  <string name="content_select_level">移動先のワールドを選択してください。現在のワールドは%1です</string>
   <string name="button_select_level1">セントラル</string>
   <string name="button_select_level2">生活ワールド</string>
   <string name="button_select_level3">資源ワールド</string>
   <string name="message_select_level">ワールドを移動しました</string>
+
+  <!-- SelectPointActivity -->
+  <string name="title_select_point">Teleporter - ポイント種別選択</string>
+  <string name="content_select_point">ポイントの種類を選択してください</string>
+  <string name="button_select_point1">オリジナルポイント</string>
+  <string name="button_select_point2">パブリックポイント</string>
+  <string name="button_select_point3">パスロックポイント</string>
+
+  <!-- SelectOwnPointActivity -->
+  <string name="title_select_own_point">Teleporter - ポイント選択</string>
+  <string name="label_select_own_point">移動先のポイントの名前を選択して「送信」を押してください</string>
+  <string name="string_select_own_point">ポイント一覧</string>
+
+  <!-- EditPointActivity -->
+  <string name="title_edit_point">Teleporter - ポイント編集</string>
+  <string name="content_edit_point">編集内容を選択してください</string>
+  <string name="button_edit_point1">ポイントを作成</string>
+  <string name="button_edit_point2">ポイントの内容を変更</string>
+  <string name="button_edit_point3">ポイントを削除</string>
+
+  <!-- AddPointActivity -->
+  <string name="title_add_point">Teleporter - ポイント作成</string>
+  <string name="label_add_point1">必要な項目を入力し「送信」を押してください。座標は今立っている場所が使用されます。詳細はウェブサイトをご確認ください</string>
+  <string name="label_add_point2-line1">これより下は上のドロップダウンで選択したものによって操作が変わります</string>
+  <string name="label_add_point2-line2">「ノーマル」または「共有」→そのまま送信ボタンを押してください</string>
+  <string name="label_add_point2-line3">「パスワード」→パスワードを入力して送信ボタンを押してください</string>
+  <string name="text_add_point1">ポイント名</string>
+  <string name="placeHolder_add_point1">必ず入力...</string>
+  <string name="text_add_point2">ポイントの種類</string>
+  <string name="text_add_point3">パスワードを入力</string>
+  <string name="placeHolder_add_point2">パスワードポイントの場合は入力...</string>
+  <string name="message_add_point">ポイントを設定しました</string>
+
+  <!-- RemovePointActivity -->
+  <string name="title_remove_point">Teleporter - ポイントを削除</string>
+  <string name="label_remove_point">削除するポイントを選択し「送信」を押してください</string>
+  <string name="text_remove_point">自分のポイント一覧</string>
+  <string name="message_remove_point">ポイントを削除しました</string>
+
+  <!-- ErrorActivity -->
+  <string name="title_error">Teleporter - エラー</string>
+  <string name="button_error1">もどる</string>
+  <string name="button_error2">ホーム</string>
 </strings>

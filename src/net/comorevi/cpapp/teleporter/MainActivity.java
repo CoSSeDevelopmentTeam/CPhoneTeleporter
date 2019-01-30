@@ -28,6 +28,7 @@ public class MainActivity extends ListActivity {
         this.addButton(new Button().setText(bundle.getString("button_home1")));
         this.addButton(new Button().setText(bundle.getString("button_home2")));
         this.addButton(new Button().setText(bundle.getString("button_home3")));
+        this.addButton(new Button().setText(bundle.getString("button_home4")));
     }
 
     @Override
