@@ -52,6 +52,11 @@ public class AddPointActivity extends CustomActivity {
         CustomResponse customResponse = (CustomResponse) response;
         Player player = customResponse.getPlayer();
 
+        if (player.getLevel().getFolderName().equals("resource")) {
+            new ErrorActivity(getManifest(), "資源ワールドではポイントを指定できません（ワールドが毎日変更されるため）", this).start(player, bundle.getStrings());
+            return ReturnType.TYPE_CONTINUE;
+        }
+
         if (String.valueOf(customResponse.getResult().get(1)).equals("")) {
             new ErrorActivity(getManifest(), "設定するポイントの名前を入力してください", this).start(player, bundle.getStrings());
             return ReturnType.TYPE_CONTINUE;
@@ -65,22 +70,22 @@ public class AddPointActivity extends CustomActivity {
         switch (String.valueOf(customResponse.getResult().get(3))) {
             case "ノーマル": //type private
                 advancedWarpAPI.addPoint(player.getName(), String.valueOf(customResponse.getResult().get(1)), player.getPosition(), PointType.POINT_TYPE_PRIVATE, null);
-                bundle.getCPhone().setHomeMessage(bundle.getString(TextFormat.AQUA + "message_add_point"));
+                bundle.getCPhone().setHomeMessage(TextFormat.AQUA + bundle.getString("message_add_point"));
                 bundle.getCPhone().home();
                 break;
             case "パスワード": //type pass
-                if (customResponse.getResult().get(4) == null) {
+                if (String.valueOf(customResponse.getResult().get(4)).equals("")) {
                     new ErrorActivity(getManifest(), "パスワードを入力してください", this).start(player, bundle.getStrings());
                     return ReturnType.TYPE_CONTINUE;
                 }
 
                 advancedWarpAPI.addPoint(player.getName(), String.valueOf(customResponse.getResult().get(1)), player.getPosition(), PointType.POINT_TYPE_PASS_LIMITED, String.valueOf(customResponse.getResult().get(4)));
-                bundle.getCPhone().setHomeMessage(bundle.getString(TextFormat.AQUA + "message_add_point"));
+                bundle.getCPhone().setHomeMessage(TextFormat.AQUA + bundle.getString("message_add_point"));
                 bundle.getCPhone().home();
                 break;
             case "共有": //type public
                 advancedWarpAPI.addPoint(player.getName(), String.valueOf(customResponse.getResult().get(1)), player.getPosition(), PointType.POINT_TYPE_PUBLIC, null);
-                bundle.getCPhone().setHomeMessage(bundle.getString(TextFormat.AQUA + "message_add_point"));
+                bundle.getCPhone().setHomeMessage(TextFormat.AQUA + bundle.getString("message_add_point"));
                 bundle.getCPhone().home();
                 break;
         }
