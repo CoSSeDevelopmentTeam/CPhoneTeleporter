@@ -52,7 +52,7 @@ public class AddPointActivity extends CustomActivity {
         CustomResponse customResponse = (CustomResponse) response;
         Player player = customResponse.getPlayer();
 
-        if (String.valueOf(customResponse.getResult().get(1)) == "") {
+        if (String.valueOf(customResponse.getResult().get(1)).equals("")) {
             new ErrorActivity(getManifest(), "設定するポイントの名前を入力してください", this).start(player, bundle.getStrings());
             return ReturnType.TYPE_CONTINUE;
         }
