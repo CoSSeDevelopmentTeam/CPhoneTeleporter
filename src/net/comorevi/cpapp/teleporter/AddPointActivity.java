@@ -84,6 +84,6 @@ public class AddPointActivity extends CustomActivity {
                 bundle.getCPhone().home();
                 break;
         }
-        return null;
+        return ReturnType.TYPE_END;
     }
 }
