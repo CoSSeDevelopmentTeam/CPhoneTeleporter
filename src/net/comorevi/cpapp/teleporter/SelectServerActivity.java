@@ -18,6 +18,6 @@ public class SelectServerActivity extends ListActivity {
 
     @Override
     public ReturnType onStop(Response response) {
-        return null;
+        return ReturnType.TYPE_END;
     }
 }

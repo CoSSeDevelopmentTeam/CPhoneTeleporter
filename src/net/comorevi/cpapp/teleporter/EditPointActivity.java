@@ -37,10 +37,10 @@ public class EditPointActivity extends ListActivity {
             case 0:
                 new AddPointActivity(getManifest()).start(cPhone.getPlayer(), bundle.getStrings());
                 return ReturnType.TYPE_CONTINUE;
+            //case 1:
+                //new ChangePointActivity(getManifest()).start(cPhone.getPlayer(), bundle.getStrings());
+                //return ReturnType.TYPE_CONTINUE;
             case 1:
-                new ChangePointActivity(getManifest()).start(cPhone.getPlayer(), bundle.getStrings());
-                return ReturnType.TYPE_CONTINUE;
-            case 2:
                 new RemovePointActivity(getManifest()).start(cPhone.getPlayer(), bundle.getStrings());
                 return ReturnType.TYPE_CONTINUE;
         }
