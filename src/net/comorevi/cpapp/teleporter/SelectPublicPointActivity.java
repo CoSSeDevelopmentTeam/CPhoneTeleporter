@@ -1,6 +1,5 @@
 package net.comorevi.cpapp.teleporter;
 
-import cn.nukkit.Player;
 import cn.nukkit.utils.TextFormat;
 import net.comorevi.cosse.warpapi.AdvancedWarpAPI;
 import net.comorevi.cphone.cphone.application.ApplicationManifest;
@@ -32,20 +31,22 @@ public class SelectPublicPointActivity extends CustomActivity {
         this.setTitle(bundle.getString("title_select_public_point"));
 
         this.publicPoints = advancedWarpAPI.getPublicPointNameList();
-        this.addFormElement(new Label().setText(bundle.getString("label_select_public_point")));
-        this.addFormElement(new Dropdown().setOption(publicPoints).setDefaultOptionIndex(0).setText(bundle.getString("text_select_public_point")));
+        if (publicPoints.isEmpty()) {
+            this.addFormElement(new Label().setText(bundle.getString("error_select_public_point")));
+        } else {
+            this.addFormElement(new Label().setText(bundle.getString("label_select_public_point")));
+            this.addFormElement(new Dropdown().setOption(publicPoints).setDefaultOptionIndex(0).setText(bundle.getString("text_select_public_point")));
+        }
     }
 
     @Override
     public ReturnType onStop(Response response) {
         CustomResponse customResponse = (CustomResponse) response;
-        Player player = customResponse.getPlayer();
         if (publicPoints.isEmpty()) {
-            new ErrorActivity(getManifest(), "公開設定のポイントはまだありません", this).start(customResponse.getPlayer(), bundle.getStrings());
+            new MainActivity(getManifest()).start(customResponse.getPlayer(), bundle.getStrings());
             return ReturnType.TYPE_CONTINUE;
         }
-
-        player.teleport(advancedWarpAPI.getDestinationPositon(String.valueOf(customResponse.getResult().get(1))));
+        customResponse.getPlayer().teleport(advancedWarpAPI.getDestinationPositon(String.valueOf(customResponse.getResult().get(1))));
         bundle.getCPhone().setHomeMessage(TextFormat.AQUA + bundle.getString("message_select_public_point"));
         return ReturnType.TYPE_END;
     }

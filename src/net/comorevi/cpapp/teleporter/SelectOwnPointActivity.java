@@ -1,6 +1,5 @@
 package net.comorevi.cpapp.teleporter;
 
-import cn.nukkit.Player;
 import cn.nukkit.utils.TextFormat;
 import net.comorevi.cosse.warpapi.AdvancedWarpAPI;
 import net.comorevi.cphone.cphone.application.ApplicationManifest;
@@ -32,6 +31,13 @@ public class SelectOwnPointActivity extends CustomActivity {
         this.setTitle(bundle.getString("title_select_own_point"));
 
         this.ownPoints = advancedWarpAPI.getOwnPointNameList(bundle.getCPhone().getPlayer().getName());
+        if (ownPoints.isEmpty()) {
+            this.addFormElement(new Label().setText(bundle.getString("error_select_own_point")));
+        } else {
+            this.addFormElement(new Label().setText(bundle.getString("label_select_own_point")));
+            this.addFormElement(new Dropdown().setOption(ownPoints).setDefaultOptionIndex(0).setText(bundle.getString("text_select_own_point")));
+        }
+
         this.addFormElement(new Label().setText(bundle.getString("label_select_own_point")));
         this.addFormElement(new Dropdown().setOption(ownPoints).setDefaultOptionIndex(0).setText(bundle.getString("string_select_own_point")));
     }
@@ -39,13 +45,11 @@ public class SelectOwnPointActivity extends CustomActivity {
     @Override
     public ReturnType onStop(Response response) {
         CustomResponse customResponse = (CustomResponse) response;
-        Player player = customResponse.getPlayer();
         if (ownPoints.isEmpty()) {
-            new ErrorActivity(getManifest(), "あなたが設定したポイントはありません", this).start(customResponse.getPlayer(), bundle.getStrings());
+            new MainActivity(getManifest()).start(customResponse.getPlayer(), bundle.getStrings());
             return ReturnType.TYPE_CONTINUE;
         }
-
-        player.teleport(advancedWarpAPI.getDestinationPositon(String.valueOf(customResponse.getResult().get(1))));
+        customResponse.getPlayer().teleport(advancedWarpAPI.getDestinationPositon(String.valueOf(customResponse.getResult().get(1))));
         bundle.getCPhone().setHomeMessage(TextFormat.AQUA + bundle.getString("message_select_own_point"));
         return ReturnType.TYPE_END;
     }

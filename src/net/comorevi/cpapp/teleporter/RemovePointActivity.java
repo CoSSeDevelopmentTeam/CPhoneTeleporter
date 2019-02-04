@@ -28,17 +28,22 @@ public class RemovePointActivity extends CustomActivity {
     @Override
     public void onCreate(Bundle bundle) {
         this.bundle = bundle;
-        this.ownPoints = advancedWarpAPI.getOwnPointNameList(bundle.getCPhone().getPlayer().getName());
         this.setTitle(bundle.getString("title_remove_point"));
-        this.addFormElement(new Label().setText(bundle.getString("label_remove_point")));
-        this.addFormElement(new Dropdown().setOption(ownPoints).setDefaultOptionIndex(0).setText(bundle.getString("text_remove_point")));
+
+        this.ownPoints = advancedWarpAPI.getOwnPointNameList(bundle.getCPhone().getPlayer().getName());
+        if (ownPoints.isEmpty()) {
+            this.addFormElement(new Label().setText(bundle.getString("error_remove_point")));
+        } else {
+            this.addFormElement(new Label().setText(bundle.getString("label_remove_point")));
+            this.addFormElement(new Dropdown().setOption(ownPoints).setDefaultOptionIndex(0).setText(bundle.getString("text_remove_point")));
+        }
     }
 
     @Override
     public ReturnType onStop(Response response) {
         CustomResponse customResponse = (CustomResponse) response;
         if (ownPoints.isEmpty()) {
-            new ErrorActivity(getManifest(), "あなたが設定したポイントはありません", this).start(customResponse.getPlayer(), bundle.getStrings());
+            new MainActivity(getManifest()).start(customResponse.getPlayer(), bundle.getStrings());
             return ReturnType.TYPE_CONTINUE;
         }
 

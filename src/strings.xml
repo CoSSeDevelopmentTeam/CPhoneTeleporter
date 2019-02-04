@@ -25,19 +25,26 @@
   <!-- SelectOwnPointActivity -->
   <string name="title_select_own_point">Teleporter - ポイント選択</string>
   <string name="label_select_own_point">移動先のポイントの名前を選択して「送信」を押してください</string>
-  <string name="string_select_own_point">ポイント一覧</string>
+  <string name="text_select_own_point">ポイント一覧</string>
   <string name="message_select_own_point">ポイントに移動しました</string>
+  <string name="error_select_own_point">ポイントが設定されていません</string>
   <!-- SelectPublicPointActivity -->
   <string name="title_select_public_point">Teleporter - 公開ポイント選択</string>
   <string name="label_select_public_point">移動先のポイントの名前を選択して「送信」を押してください</string>
-  <string name="string_select_public_point">ポイント一覧</string>
+  <string name="text_select_public_point">ポイント一覧</string>
   <string name="message_select_public_point">ポイントに移動しました</string>
+  <string name="error_select_public_point">ポイントが設定されていません</string>
   <!-- SelectPassPointActivity -->
   <string name="title_select_pass_point">Teleporter - パスワードポイント選択</string>
   <string name="label_select_pass_point">移動先のポイントの名前、パスワードを入力して「送信」を押してください</string>
   <string name="text_select_pass_point1">ポイント名</string>
   <string name="text_select_pass_point2">パスワード</string>
   <string name="message_select_pass_point">ポイントに移動しました</string>
+
+
+  <!-- SelectServerActivity -->
+  <string name="title_select_server">Teleporter - サーバ選択</string>
+  <string name="content_select_server">外部サーバーへ移動します。移動先のサーバーを選択してください</string>
 
 
   <!-- EditPointActivity -->
@@ -63,6 +70,7 @@
   <string name="label_remove_point">削除するポイントを選択し「送信」を押してください</string>
   <string name="text_remove_point">自分のポイント一覧</string>
   <string name="message_remove_point">ポイントを削除しました</string>
+  <string name="error_remove_point">ポイントが設定されていません</string>
 
 
   <!-- ErrorActivity -->

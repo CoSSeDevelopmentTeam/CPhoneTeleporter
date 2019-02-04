@@ -37,15 +37,6 @@ public class ErrorActivity extends ModalActivity {
                 case "net.comorevi.cpapp.teleporter.AddPointActivity":
                     new AddPointActivity(getManifest()).start(modalResponse.getPlayer(), bundle.getStrings());
                     break;
-                case "net.comorevi.cpapp.teleporter.RemovePointActivity":
-                    new RemovePointActivity(getManifest()).start(modalResponse.getPlayer(), bundle.getStrings());
-                    break;
-                case "net.comorevi.cpapp.teleporter.SelectOwnPointActivity":
-                    new SelectOwnPointActivity(getManifest()).start(modalResponse.getPlayer(), bundle.getStrings());
-                    break;
-                case "net.comorevi.cpapp.teleporter.SelectPassPointActivity":
-                    new SelectPassPointActivity(getManifest()).start(modalResponse.getPlayer(), bundle.getStrings());
-                    break;
             }
             return ReturnType.TYPE_CONTINUE;
         } else if (modalResponse.isButton2Clicked()) {
