@@ -37,9 +37,6 @@ public class SelectOwnPointActivity extends CustomActivity {
             this.addFormElement(new Label().setText(bundle.getString("label_select_own_point")));
             this.addFormElement(new Dropdown().setOption(ownPoints).setDefaultOptionIndex(0).setText(bundle.getString("text_select_own_point")));
         }
-
-        this.addFormElement(new Label().setText(bundle.getString("label_select_own_point")));
-        this.addFormElement(new Dropdown().setOption(ownPoints).setDefaultOptionIndex(0).setText(bundle.getString("string_select_own_point")));
     }
 
     @Override
