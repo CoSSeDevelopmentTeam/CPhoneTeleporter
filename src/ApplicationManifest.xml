@@ -2,19 +2,30 @@
 <!--<!DOCTYPE manifest SYSTEM "https://raw.githubusercontent.com/CoSSeDevelopmentTeam/CPhone/master/CPhoneManifest.dtd">-->
 
 <manifest>
-  <application>
-	<title>Teleporter</title>
-	<description>ワープに使用するアプリ</description>
-	<author>popkechupki</author>
-	<version>1.0.1</version>
-	<mcbeversion>1.8</mcbeversion>
-	<icon>https://google.co.jp/</icon>
-  </application>
+	<application>
+		<title>Teleporter</title>
+		<description>ワープに使用するアプリ</description>
+		<author>popkechupki</author>
+		<version>1.1.0</version>
+		<mcbeversion>1.14</mcbeversion>
+		<icon>https://info.comorevi.net/images/favicon/logo_transparent.png</icon>
+	</application>
 
-  <permission type = "default" />
+	<permission type = "default" />
 
-  <activity>
-	<name>MainActivity</name>
-	<main>net.comorevi.cpapp.teleporter.MainActivity</main>
-  </activity>
+	<activity>
+		<name>MainActivity</name>
+		<main>net.comorevi.cpapp.teleporter.MainActivity</main>
+	</activity>
+
+	<external-lang>
+		<lang region="en">
+			<title>Teleporter</title>
+			<description>This is a application to move to other worlds, your optional point and other servers.</description>
+		</lang>
+		<lang region="ja">
+			<title>テレポーター/Teleporter</title>
+			<description>ワールドの移動やオリジナルポイントを設定してワープもできるアプリです。</description>
+		</lang>
+	</external-lang>
 </manifest>
