@@ -1,7 +1,9 @@
 package net.comorevi.cpapp.teleporter;
 
 import cn.nukkit.Player;
-import cn.nukkit.level.Level;
+import cn.nukkit.event.player.PlayerTeleportEvent;
+import cn.nukkit.network.protocol.ChangeDimensionPacket;
+import cn.nukkit.network.protocol.PlayStatusPacket;
 import cn.nukkit.utils.Config;
 import cn.nukkit.utils.TextFormat;
 import net.comorevi.cphone.cphone.application.ApplicationManifest;
@@ -48,6 +50,7 @@ public class SelectLevelActivity extends ListActivity {
         this.addButton(new Button().setText(bundle.getString("button_select_level1")));
         this.addButton(new Button().setText(bundle.getString("button_select_level2")));
         this.addButton(new Button().setText(bundle.getString("button_select_level3")));
+        if (bundle.getCPhone().getPlayer().isOp()) this.addButton(new Button().setText("セントラル(建築中"));
     }
 
     @Override
@@ -56,16 +59,37 @@ public class SelectLevelActivity extends ListActivity {
         Player player = listResponse.getPlayer();
         switch (listResponse.getButtonIndex()) {
             case 0:
-                player.teleport(SharingData.server.getLevelByName(config.getString("WORLDNAME_CENTRAL")).getSpawnLocation());
+                player.teleport(SharingData.server.getLevelByName(config.getString("WORLDNAME_CENTRAL")).getSafeSpawn());
+                player.sendMessage(TextFormat.AQUA + bundle.getString("message_select_level"));
                 break;
             case 1:
-                player.teleport(SharingData.server.getLevelByName(config.getString("WORLDNAME_LIFE")).getSpawnLocation());
+                player.teleport(SharingData.server.getLevelByName(config.getString("WORLDNAME_LIFE")).getSafeSpawn());
+                player.sendMessage(TextFormat.AQUA + bundle.getString("message_select_level"));
                 break;
             case 2:
-                player.teleport(SharingData.server.getLevelByName(config.getString("WORLDNAME_RESOURCE")).getSpawnLocation());
+                player.teleport(SharingData.server.getLevelByName(config.getString("WORLDNAME_RESOURCE")).getSafeSpawn());
+                player.sendMessage(TextFormat.AQUA + bundle.getString("message_select_level"));
+                break;
+            case 3:
+                player.teleport(SharingData.server.getLevelByName("central2020-01").getSafeSpawn());
+                player.sendMessage(TextFormat.AQUA + bundle.getString("message_select_level"));
                 break;
         }
-        ((ListResponse) response).getPlayer().sendMessage(TextFormat.AQUA + bundle.getString("message_select_level"));
         return ReturnType.TYPE_IGNORE;
+    }
+
+    private void tpPlayer(Player player, String levelname) {
+        player.teleport(SharingData.server.getLevelByName(levelname).getSafeSpawn(), PlayerTeleportEvent.TeleportCause.PLUGIN);
+        player.sendMessage(TextFormat.AQUA + bundle.getString("message_select_level"));
+        ChangeDimensionPacket pk = new ChangeDimensionPacket();
+        pk.dimension = 0; //0...over world, 1...nether, 2...end
+        pk.x = player.getFloorX();
+        pk.y = player.getFloorY();
+        pk.z = player.getFloorZ();
+        pk.respawn = true;
+        player.dataPacket(pk);
+        PlayStatusPacket pk2 = new PlayStatusPacket();
+        pk2.status = PlayStatusPacket.PLAYER_SPAWN;
+        player.dataPacket(pk2);
     }
 }

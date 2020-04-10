@@ -21,7 +21,7 @@
   <string name="button_select_level1">セントラル</string>
   <string name="button_select_level2">生活ワールド</string>
   <string name="button_select_level3">資源ワールド</string>
-  <string name="message_select_level">ワールドを移動しました</string>
+  <string name="message_select_level">ワールドを移動しました&#x0A;ワールドの読み込みが完了するまでお待ちください...</string>
   <!-- SelectOwnPointActivity -->
   <string name="title_select_own_point">Teleporter - ポイント選択</string>
   <string name="label_select_own_point">移動先のポイントの名前を選択して「送信」を押してください</string>
