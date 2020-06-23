@@ -1,10 +1,9 @@
 package net.comorevi.cpapp.teleporter;
 
 import cn.nukkit.Player;
-import cn.nukkit.event.player.PlayerTeleportEvent;
-import cn.nukkit.network.protocol.ChangeDimensionPacket;
-import cn.nukkit.network.protocol.PlayStatusPacket;
+import cn.nukkit.level.Position;
 import cn.nukkit.utils.Config;
+import cn.nukkit.utils.ConfigSection;
 import cn.nukkit.utils.TextFormat;
 import net.comorevi.cphone.cphone.application.ApplicationManifest;
 import net.comorevi.cphone.cphone.model.Bundle;
@@ -16,7 +15,6 @@ import net.comorevi.cphone.cphone.widget.element.Button;
 import net.comorevi.cphone.presenter.SharingData;
 
 import java.io.File;
-import java.util.LinkedHashMap;
 
 public class SelectLevelActivity extends ListActivity {
 
@@ -27,16 +25,12 @@ public class SelectLevelActivity extends ListActivity {
         super(manifest);
         File file = new File(SharingData.server.getDataPath() + "plugins/CPhone/AppData/Teleporter");
         file.mkdirs();
-        config = new Config(
-                new File(file, "config.yml"),
-                Config.YAML,
-                new LinkedHashMap<String, Object>() {
-                    {
-                        put("WORLDNAME_CENTRAL", "central2020-01");
-                        put("WORLDNAME_LIFE", "life2020-01");
-                        put("WORLDNAME_RESOURCE", "resource");
-                    }
-                });
+        ConfigSection cs = new ConfigSection(){{
+            put("WORLDNAME_CENTRAL", "central2020-01");
+            put("WORLDNAME_LIFE", "life2020-01");
+            put("WORLDNAME_RESOURCE", "resource");
+        }};
+        config = new Config(new File(file, "config.yml"), Config.YAML, cs);
         config.save();
     }
 
@@ -50,7 +44,7 @@ public class SelectLevelActivity extends ListActivity {
         this.addButton(new Button().setText(bundle.getString("button_select_level1")));
         this.addButton(new Button().setText(bundle.getString("button_select_level2")));
         this.addButton(new Button().setText(bundle.getString("button_select_level3")));
-        if (bundle.getCPhone().getPlayer().isOp()) this.addButton(new Button().setText("セントラル(建築中"));
+        //if (bundle.getCPhone().getPlayer().isOp()) this.addButton(new Button().setText("セントラル(建築中"));
     }
 
     @Override
@@ -59,37 +53,64 @@ public class SelectLevelActivity extends ListActivity {
         Player player = listResponse.getPlayer();
         switch (listResponse.getButtonIndex()) {
             case 0:
-                player.teleport(SharingData.server.getLevelByName(config.getString("WORLDNAME_CENTRAL")).getSafeSpawn());
-                player.sendMessage(TextFormat.AQUA + bundle.getString("message_select_level"));
+                tpPlayer(player, config.getString("WORLDNAME_CENTRAL"));
                 break;
             case 1:
-                player.teleport(SharingData.server.getLevelByName(config.getString("WORLDNAME_LIFE")).getSafeSpawn());
-                player.sendMessage(TextFormat.AQUA + bundle.getString("message_select_level"));
+                tpPlayer(player, config.getString("WORLDNAME_LIFE"));
                 break;
             case 2:
-                player.teleport(SharingData.server.getLevelByName(config.getString("WORLDNAME_RESOURCE")).getSafeSpawn());
-                player.sendMessage(TextFormat.AQUA + bundle.getString("message_select_level"));
+                tpPlayer(player, config.getString("WORLDNAME_RESOURCE"));
                 break;
+            /*
             case 3:
-                player.teleport(SharingData.server.getLevelByName("central2020-01").getSafeSpawn());
-                player.sendMessage(TextFormat.AQUA + bundle.getString("message_select_level"));
+                tpPlayer(player, "central2020-01");
                 break;
+             */
         }
         return ReturnType.TYPE_IGNORE;
     }
 
     private void tpPlayer(Player player, String levelname) {
-        player.teleport(SharingData.server.getLevelByName(levelname).getSafeSpawn(), PlayerTeleportEvent.TeleportCause.PLUGIN);
+        //注意...ネザーを追加する際にはdimensionの値に関する処理を変更すること。
         player.sendMessage(TextFormat.AQUA + bundle.getString("message_select_level"));
+        player.teleport(SharingData.server.getLevelByName(levelname).getSafeSpawn());
+        /*
         ChangeDimensionPacket pk = new ChangeDimensionPacket();
-        pk.dimension = 0; //0...over world, 1...nether, 2...end
-        pk.x = player.getFloorX();
-        pk.y = player.getFloorY();
-        pk.z = player.getFloorZ();
-        pk.respawn = true;
+        pk.dimension = 1; //0...over world, 1...nether, 2...end
+        pk.x = 0;
+        pk.y = 0;
+        pk.z = 0;
         player.dataPacket(pk);
         PlayStatusPacket pk2 = new PlayStatusPacket();
         pk2.status = PlayStatusPacket.PLAYER_SPAWN;
         player.dataPacket(pk2);
+
+        player.teleport(pos);
+        pk.dimension = 0;
+        pk.x = (float) pos.x;
+        pk.y = (float) pos.y;
+        pk.z = (float) pos.z;
+        pk.respawn = true;
+        player.dataPacket(pk);
+        new Timer().schedule(new updatePlayStatusTask(player), 5000);
+
+       */
     }
+
+    /*
+    class updatePlayStatusTask extends TimerTask {
+        Player player;
+
+        updatePlayStatusTask(Player player) {
+            this.player = player;
+        }
+
+        @Override
+        public void run() {
+            PlayStatusPacket pk2 = new PlayStatusPacket();
+            pk2.status = PlayStatusPacket.PLAYER_SPAWN;
+            player.dataPacket(pk2);
+        }
+    }
+     */
 }
